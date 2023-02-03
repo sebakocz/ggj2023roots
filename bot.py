@@ -21,6 +21,7 @@ from Database import database
 import asyncio
 import platform
 
+from Database.Models.node import Node
 
 # Extra Cases ---------------------------------------------------------------
 
@@ -45,17 +46,17 @@ is_dev = os.getenv("IS_DEV") == "True"
 class MyBot(commands.Bot):
     async def setup_hook(self):
 
-        # await database.init()
+        await database.init()
 
         await bot.load_extension("Cogs.main_cog")
 
-        # if is_dev:
-        #     await bot.load_extension("Cogs.test_cog")
+        if is_dev:
+            await bot.load_extension("Cogs.test_cog")
 
-    # async def close(self):
-    #     logging.info("Closing discord bot...")
-    #     await database.Tortoise.close_connections()
-    #     await super().close()
+    async def close(self):
+        logging.info("Closing discord bot...")
+        await database.Tortoise.close_connections()
+        await super().close()
 
 
 intents = discord.Intents.all()

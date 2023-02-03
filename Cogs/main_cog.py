@@ -10,10 +10,6 @@ class MainCog(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def ping(self, ctx):
-        await ctx.send("Pong!")
-
-    @commands.command()
     async def sync(self, ctx):
         await ctx.send("Wait for it...")
         self.bot.tree.copy_global_to(guild=ctx.guild)
