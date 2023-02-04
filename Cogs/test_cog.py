@@ -5,6 +5,7 @@ from discord.ext import commands
 
 from Database.Models.node import Node
 from Setup.nodes import setup_nodes, get_print_all
+from Setup.user import spawn_user, move_to
 
 
 class TestCog(commands.Cog):
@@ -24,10 +25,16 @@ class TestCog(commands.Cog):
 
     @commands.command()
     async def print_all(self, ctx):
-        await ctx.send("Working on it...")
         text = await get_print_all()
         text = "```" + text + "```"
         await ctx.send(text)
+
+    @commands.command()
+    async def spawn_me(self, ctx):
+        user = self.bot.get_user(ctx.author.id)
+        await spawn_user(user)
+        await move_to(user, None, self.bot)
+        await ctx.send("Spawned!")
 
 async def setup(bot):  # an extension must have a setup function
     await bot.add_cog(TestCog(bot))  # adding a cog

@@ -11,22 +11,26 @@
 # - quux
 import asyncio
 
+import discord
+
 from Database.Models.node import Node
 
 nodes = {
-    "foo": {
-        "foobar": {},
-        "foobaz": {},
-    },
-    "bar": {
-        "barfoo": {
-            "barfooqux": {},
-            "barfooquux": {},
-        },
-    },
-    "baz": {},
-    "qux": {},
-    "quux": {},
+    "root": {
+        "foo": {
+                "foobar": {},
+                "foobaz": {},
+            },
+            "bar": {
+                "barfoo": {
+                    "barfooqux": {},
+                    "barfooquux": {},
+                },
+            },
+        "baz": {},
+        "qux": {},
+        "quux": {},
+    }
 }
 
 
@@ -48,12 +52,17 @@ async def setup_nodes(bot):
 
     # create channels according to nodes
     for guild in bot.guilds:
-        await setup_channels(guild, None)
+        await setup_channels(guild)
 
 
-async def setup_channels(guild, parent_id):
+async def setup_channels(guild):
     for node in await Node.all():
-        await guild.create_text_channel(node.name)
+        channel = await guild.create_text_channel(node.name, overwrites={
+            guild.default_role: discord.PermissionOverwrite(read_messages=False),
+            guild.me: discord.PermissionOverwrite(read_messages=True),
+        })
+        await Node.filter(id=node.id).update(channel_id=channel.id)
+
 
 async def setup_children(parent, children):
     for name, children in children.items():

@@ -7,4 +7,5 @@ class Node(Model):
     id = fields.IntField(pk=True)
     name = fields.CharField(max_length=30)
     parent_id = fields.IntField(null=True)
+    channel_id = fields.BigIntField(null=True)
 

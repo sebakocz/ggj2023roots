@@ -22,6 +22,7 @@ import asyncio
 import platform
 
 from Database.Models.node import Node
+from Setup.user import spawn_user, move_to
 
 # Extra Cases ---------------------------------------------------------------
 
@@ -49,9 +50,14 @@ class MyBot(commands.Bot):
         await database.init()
 
         await bot.load_extension("Cogs.main_cog")
+        await bot.load_extension("Cogs.user_cog")
 
         if is_dev:
             await bot.load_extension("Cogs.test_cog")
+
+    async def on_member_join(self, member):
+        await spawn_user(member)
+        await move_to(member, None, bot)
 
     async def close(self):
         logging.info("Closing discord bot...")
