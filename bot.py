@@ -59,7 +59,7 @@ class MyBot(commands.Bot):
         await spawn_user(member)
 
         node = await Node.get(name="root")
-        await move_to(member, node, bot)
+        await move_to(member, node)
 
     async def close(self):
         logging.info("Closing discord bot...")

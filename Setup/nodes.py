@@ -50,18 +50,45 @@ async def setup_nodes(bot):
             tasks.append(channel.delete())
         await asyncio.gather(*tasks)
 
+    # reset all roles
+    for guild in bot.guilds:
+        tasks = []
+        for role in guild.roles:
+            # don't delete @everyone
+            if role.id == 1071165615689187439:
+                continue
+            # don't delete bot
+            if role.id == 1071170888000618642:
+                continue
+            tasks.append(role.delete())
+        await asyncio.gather(*tasks)
+
     # create channels according to nodes
     for guild in bot.guilds:
         await setup_channels(guild)
 
 
 async def setup_channels(guild):
+    tasks_create_channels = []
+    tasks_create_roles = []
+    tasks_set_permissions = []
     for node in await Node.all():
-        channel = await guild.create_text_channel(node.name, overwrites={
+        tasks_create_channels.append(guild.create_text_channel(node.name, overwrites={
             guild.default_role: discord.PermissionOverwrite(read_messages=False),
             guild.me: discord.PermissionOverwrite(read_messages=True),
-        })
-        await Node.filter(id=node.id).update(channel_id=channel.id)
+        }))
+
+        tasks_create_roles.append(guild.create_role(name=node.name))
+
+    channels = await asyncio.gather(*tasks_create_channels)
+    roles = await asyncio.gather(*tasks_create_roles)
+
+    for node, channel, role in zip(await Node.all(), channels, roles):
+        tasks_set_permissions.append(channel.set_permissions(role, read_messages=True))
+
+        await Node.filter(id=node.id).update(channel_id=channel.id, role_id=role.id)
+
+    await asyncio.gather(*tasks_set_permissions)
 
 
 async def setup_children(parent, children):

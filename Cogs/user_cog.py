@@ -16,11 +16,10 @@ class UserCog(commands.Cog):
 
     @commands.command()
     async def cd(self, ctx, *, path):
-        # TODO: why is is this slow?
         if path == "..":
             user = await User.get(discord_id=ctx.author.id).prefetch_related("where")
             parent_node = await Node.get(id=user.where.parent_id)
-            await move_to(ctx.author, parent_node, self.bot)
+            await move_to(ctx.author, parent_node)
             return
 
         try:
@@ -29,7 +28,7 @@ class UserCog(commands.Cog):
             await ctx.send("Doesn't exist!")
             return
 
-        await move_to(ctx.author, node, self.bot)
+        await move_to(ctx.author, node)
 
     @commands.command()
     async def ls(self, ctx):
