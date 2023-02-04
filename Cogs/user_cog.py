@@ -61,7 +61,8 @@ class UserCog(commands.Cog):
         node = await Node.get(channel_id=ctx.channel.id)
         if node.content:
             if node.content["malware"]:
-                embed = get_malware_embed(MalwareType(node.content["malware"]["type"]))
+                creator = await User.get(discord_id=node.content["malware"]["owner"])
+                embed = get_malware_embed(MalwareType(node.content["malware"]["type"]), creator)
                 await ctx.send(embed=embed)
 
     @commands.command()
@@ -101,7 +102,6 @@ class UserCog(commands.Cog):
         channel = ctx.channel
 
         await attack(type, user, channel)
-
 
     @commands.command()
     async def leaderboards(self, ctx):
