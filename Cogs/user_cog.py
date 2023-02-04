@@ -112,10 +112,10 @@ class UserCog(commands.Cog):
     async def help(self, ctx):
         await ctx.send("```"
                        ">ls - list directory\n"
-                       ">cd <path | ..> - change directory\n"
+                       ">cd [path | ..] - change directory\n"
                        ">whoami - show your stats\n"
-                       ">deploy <'worm' | 'virus' | 'trojan'> - deploy malware\n"
-                       ">apply <'firewall' | 'patching' | 'anti-virus'> - apply attack\n"
+                       ">deploy ['worm' | 'virus' | 'trojan'] - deploy malware\n"
+                       ">apply ['firewall' | 'patching' | 'anti-virus'] - apply attack\n"
                        ">leaderboards - show leaderboards\n"
                        "```")
 
