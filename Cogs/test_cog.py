@@ -31,10 +31,11 @@ class TestCog(commands.Cog):
 
     @commands.command()
     async def spawn_me(self, ctx):
-        user = self.bot.get_user(ctx.author.id)
-        await spawn_user(user)
-        await move_to(user, None, self.bot)
+        await spawn_user(ctx.author)
+        node = await Node.get(name="root")
+        await move_to(ctx.author, node)
         await ctx.send("Spawned!")
+
 
 async def setup(bot):  # an extension must have a setup function
     await bot.add_cog(TestCog(bot))  # adding a cog

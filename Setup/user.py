@@ -30,7 +30,8 @@ async def move_to(member: discord.Member, node: Node):
     await member.add_roles(role)
 
 
-def whoami_embed():
+def whoami_embed(user: User):
     embed = discord.Embed(title=f">whoami")
     embed.add_field(name="<insert hacker name>", value="<insert cool hacker background story>", inline=True)
+    embed.add_field(name="Control Score", value=f"{user.score}", inline=True)
     return embed

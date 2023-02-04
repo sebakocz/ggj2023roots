@@ -6,6 +6,7 @@ from tortoise.exceptions import DoesNotExist
 
 from Database.Models.node import Node
 from Database.Models.user import User
+from Setup.attack import attack, AttackType
 from Setup.malware import set_malware, MalwareType, get_malware_embed
 from Setup.user import move_to, whoami_embed
 
@@ -17,8 +18,9 @@ class UserCog(commands.Cog):
 
     @commands.command()
     async def cd(self, ctx, *, path):
+        user = await User.get(discord_id=ctx.author.id).prefetch_related("where")
+
         if path == "..":
-            user = await User.get(discord_id=ctx.author.id).prefetch_related("where")
             if user.where.parent_id is None:
                 await ctx.send("You're already at the root! You can't go up any further.")
                 return
@@ -31,6 +33,13 @@ class UserCog(commands.Cog):
         except DoesNotExist:
             await ctx.send("Doesn't exist!")
             return
+
+        # can't pass if there's malware not owned by you
+        if user.where.content:
+            if user.where.content["malware"]:
+                if user.where.content["malware"]["owner"] != ctx.author.id:
+                    await ctx.send("This path is blocked by malware! Try to apply an attack to it.")
+                    return
 
         await move_to(ctx.author, node)
 
@@ -57,8 +66,9 @@ class UserCog(commands.Cog):
 
     @commands.command()
     async def whoami(self, ctx):
-        user = whoami_embed()
-        await ctx.send(embed=user)
+        user = await User.get(discord_id=ctx.author.id)
+        embed = whoami_embed(user)
+        await ctx.send(embed=embed)
 
     @commands.command()
     async def set(self, ctx, malware_name):
@@ -76,6 +86,21 @@ class UserCog(commands.Cog):
         channel = ctx.channel
 
         await set_malware(type, user, channel)
+        # can't do anything after cause of asyncio delay
+
+    @commands.command()
+    async def apply(self, ctx, attack_name):
+
+        try:
+            type = AttackType(attack_name)
+        except ValueError:
+            await ctx.send("Invalid attack name!")
+            return
+
+        user = await User.get(discord_id=ctx.author.id).prefetch_related("where")
+        channel = ctx.channel
+
+        await attack(type, user, channel)
 
 
 async def setup(bot):  # an extension must have a setup function

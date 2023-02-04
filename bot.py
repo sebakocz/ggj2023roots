@@ -22,6 +22,7 @@ import asyncio
 import platform
 
 from Database.Models.node import Node
+from Database.Models.user import User
 from Setup.content import cleanup_all_content
 from Setup.user import spawn_user, move_to, whoami_embed
 
@@ -73,7 +74,8 @@ class MyBot(commands.Bot):
         welcome_message = f"Welcome to the {node.name}, {member.mention}!"
         await channel.send(welcome_message)
 
-        embed = whoami_embed()
+        user = await User.get(discord_id=member.id)
+        embed = whoami_embed(user)
         await channel.send(embed=embed)
 
     async def close(self):
