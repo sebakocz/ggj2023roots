@@ -38,3 +38,11 @@ def whoami_embed(user: User):
     embed.add_field(name=f"Control Score: {user.score} \U0001fa99", value="", inline=False)
     embed.set_image(url=portraits[user.portrait_id])
     return embed
+
+
+async def leaderboards_embed():
+    top_10_users = await User.all().order_by("-score")
+    embed = discord.Embed(title="Leaderboards")
+    for i, user in enumerate(top_10_users[:10]):
+        embed.add_field(name=f"{i + 1}. - {user.score} \U0001fa99", value=f"<@{user.discord_id}>", inline=False)
+    return embed

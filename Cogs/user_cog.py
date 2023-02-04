@@ -8,7 +8,7 @@ from Database.Models.node import Node
 from Database.Models.user import User
 from Setup.attack import attack, AttackType
 from Setup.malware import set_malware, MalwareType, get_malware_embed
-from Setup.user import move_to, whoami_embed
+from Setup.user import move_to, whoami_embed, leaderboards_embed
 
 
 class UserCog(commands.Cog):
@@ -102,6 +102,11 @@ class UserCog(commands.Cog):
 
         await attack(type, user, channel)
 
+
+    @commands.command()
+    async def leaderboards(self, ctx):
+        embed = await leaderboards_embed()
+        await ctx.send(embed=embed)
 
 async def setup(bot):  # an extension must have a setup function
     await bot.add_cog(UserCog(bot))  # adding a cog
