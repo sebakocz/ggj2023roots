@@ -1,4 +1,5 @@
 timeout = 60
+on_timeout_increment_by = 5
 
 images = {
     "firewall": "https://cdn.discordapp.com/attachments/1033862909417246751/1071418342520401991/Sebas_virus_digital_art_colorful_firewall_6ecd1931-b36e-4f27-9de7-96990020e5b2.png",
