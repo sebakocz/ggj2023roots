@@ -6,6 +6,7 @@ from tortoise.exceptions import DoesNotExist
 
 from Database.Models.node import Node
 from Database.Models.user import User
+from Setup.malware import set_malware, MalwareType, get_malware_embed
 from Setup.user import move_to, whoami_embed
 
 
@@ -18,6 +19,9 @@ class UserCog(commands.Cog):
     async def cd(self, ctx, *, path):
         if path == "..":
             user = await User.get(discord_id=ctx.author.id).prefetch_related("where")
+            if user.where.parent_id is None:
+                await ctx.send("You're already at the root! You can't go up any further.")
+                return
             parent_node = await Node.get(id=user.where.parent_id)
             await move_to(ctx.author, parent_node)
             return
@@ -37,7 +41,7 @@ class UserCog(commands.Cog):
 
         text = ""
         for child in children:
-            text += child.name + "\n"
+            text += "/" + child.name + "\n"
 
         if text == "":
             text = "Empty Directory."
@@ -45,10 +49,34 @@ class UserCog(commands.Cog):
         text = "```" + text + "```"
         await ctx.send(text)
 
+        node = await Node.get(channel_id=ctx.channel.id)
+        if node.content:
+            if node.content["malware"]:
+                embed = get_malware_embed(MalwareType(node.content["malware"]["type"]))
+                await ctx.send(embed=embed)
+
     @commands.command()
     async def whoami(self, ctx):
         user = whoami_embed()
         await ctx.send(embed=user)
+
+    @commands.command()
+    async def set(self, ctx, malware_name):
+        if ctx.channel.name == "root":
+            await ctx.send("You can't set malware in the root directory! Go deeper!")
+            return
+
+        try:
+            type = MalwareType(malware_name)
+        except ValueError:
+            await ctx.send("Invalid malware name!")
+            return
+
+        user = await User.get(discord_id=ctx.author.id).prefetch_related("where")
+        channel = ctx.channel
+
+        await set_malware(type, user, channel)
+
 
 async def setup(bot):  # an extension must have a setup function
     await bot.add_cog(UserCog(bot))  # adding a cog

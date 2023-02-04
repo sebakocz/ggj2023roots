@@ -9,3 +9,4 @@ class Node(Model):
     parent_id = fields.IntField(null=True)
     channel_id = fields.BigIntField(null=True)
     role_id = fields.BigIntField(null=True)
+    content = fields.JSONField(default={})

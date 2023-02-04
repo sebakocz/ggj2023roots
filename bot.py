@@ -22,6 +22,7 @@ import asyncio
 import platform
 
 from Database.Models.node import Node
+from Setup.content import cleanup_all_content
 from Setup.user import spawn_user, move_to, whoami_embed
 
 # Extra Cases ---------------------------------------------------------------
@@ -54,6 +55,8 @@ class MyBot(commands.Bot):
 
         if is_dev:
             await bot.load_extension("Cogs.test_cog")
+
+        await cleanup_all_content()
 
     async def on_member_join(self, member):
         await member.edit(nick="Cool Hacker")
