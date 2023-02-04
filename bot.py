@@ -87,6 +87,7 @@ intents = discord.Intents.all()
 bot = MyBot(
     command_prefix=">",
     intents=intents,
+    help_command=None,
 )
 
 

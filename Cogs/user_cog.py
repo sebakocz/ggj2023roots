@@ -108,5 +108,16 @@ class UserCog(commands.Cog):
         embed = await leaderboards_embed()
         await ctx.send(embed=embed)
 
+    @commands.command()
+    async def help(self, ctx):
+        await ctx.send("```"
+                       ">ls - list directory\n"
+                       ">cd <path | ..> - change directory\n"
+                       ">whoami - show your stats\n"
+                       ">deploy <'worm' | 'virus' | 'trojan'> - deploy malware\n"
+                       ">apply <'firewall' | 'patching' | 'anti-virus'> - apply attack\n"
+                       ">leaderboards - show leaderboards\n"
+                       "```")
+
 async def setup(bot):  # an extension must have a setup function
     await bot.add_cog(UserCog(bot))  # adding a cog
