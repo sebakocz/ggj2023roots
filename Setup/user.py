@@ -1,14 +1,20 @@
+import random
+
 import discord
 
 from Database.Models.node import Node
 from Database.Models.user import User
-from constants import backgrounds, portraits
+from constants import backgrounds, portraits, names
 
 
 async def spawn_user(member: discord.Member):
     await User.filter(discord_id=member.id).delete()
 
     user = await User.create(discord_id=member.id)
+    user.name = random.choice(names)
+    user.background_id = random.randint(0, len(backgrounds) - 1)
+    user.portrait_id = random.randint(0, len(portraits) - 1)
+    await user.save()
     await member.edit(nick=user.name)
 
 
