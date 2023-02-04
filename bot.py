@@ -22,7 +22,7 @@ import asyncio
 import platform
 
 from Database.Models.node import Node
-from Setup.user import spawn_user, move_to
+from Setup.user import spawn_user, move_to, whoami_embed
 
 # Extra Cases ---------------------------------------------------------------
 
@@ -56,10 +56,22 @@ class MyBot(commands.Bot):
             await bot.load_extension("Cogs.test_cog")
 
     async def on_member_join(self, member):
+        await member.edit(nick="Cool Hacker")
+
+        # TODO: generate image, name, and background story
         await spawn_user(member)
 
         node = await Node.get(name="root")
         await move_to(member, node)
+
+        channel = self.get_channel(node.channel_id)
+
+        # greeting msg
+        welcome_message = f"Welcome to the {node.name}, {member.mention}!"
+        await channel.send(welcome_message)
+
+        embed = whoami_embed()
+        await channel.send(embed=embed)
 
     async def close(self):
         logging.info("Closing discord bot...")

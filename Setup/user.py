@@ -28,3 +28,9 @@ async def move_to(member: discord.Member, node: Node):
     # add channel role
     role = discord.utils.get(member.guild.roles, id=node.role_id)
     await member.add_roles(role)
+
+
+def whoami_embed():
+    embed = discord.Embed(title=f">whoami")
+    embed.add_field(name="<insert hacker name>", value="<insert cool hacker background story>", inline=True)
+    return embed

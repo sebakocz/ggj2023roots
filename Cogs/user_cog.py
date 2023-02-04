@@ -6,7 +6,7 @@ from tortoise.exceptions import DoesNotExist
 
 from Database.Models.node import Node
 from Database.Models.user import User
-from Setup.user import move_to
+from Setup.user import move_to, whoami_embed
 
 
 class UserCog(commands.Cog):
@@ -45,6 +45,10 @@ class UserCog(commands.Cog):
         text = "```" + text + "```"
         await ctx.send(text)
 
+    @commands.command()
+    async def whoami(self, ctx):
+        user = whoami_embed()
+        await ctx.send(embed=user)
 
 async def setup(bot):  # an extension must have a setup function
     await bot.add_cog(UserCog(bot))  # adding a cog
