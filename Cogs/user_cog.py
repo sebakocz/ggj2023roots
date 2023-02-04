@@ -71,9 +71,9 @@ class UserCog(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command()
-    async def set(self, ctx, malware_name):
+    async def deploy(self, ctx, malware_name):
         if ctx.channel.name == "root":
-            await ctx.send("You can't set malware in the root directory! Go deeper!")
+            await ctx.send("You can't deploy malware in the root directory! Go deeper!")
             return
 
         try:

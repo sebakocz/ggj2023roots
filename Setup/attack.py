@@ -7,7 +7,7 @@ import discord
 
 from Database.Models.user import User
 from Setup.malware import MalwareType
-from constants import timeout
+from constants import timeout, images
 
 
 class AttackType(Enum):
@@ -65,28 +65,57 @@ async def attack(type: AttackType, user: User, channel: discord.TextChannel):
     # 75% chance of success vs preferred attack
     # 25% otherwise
     malware = node.content[list(node.content.keys())[0]]
+    favored = False
     success_chance = 0.25
     if type.value == AttackType.AntiVirus.value and malware["type"] == MalwareType.VIRUS.value:
+        favored = True
         success_chance = 0.75
     elif type.value == AttackType.Firewall.value and malware["type"] == MalwareType.WORM.value:
+        favored = True
         success_chance = 0.75
     elif type.value == AttackType.Patching.value and malware["type"] == MalwareType.TROJAN.value:
+        favored = True
         success_chance = 0.75
 
-    is_win = random() < success_chance
+    rolled = random()
+    is_win = rolled < success_chance
     malware_owner = await User.get(discord_id=malware["owner"])
     if is_win:
-        await channel.send(f"You successfully defended against the {malware['type']}!")
+        embed = result_embed(True, rolled, type, favored)
+        await channel.send(embed=embed)
         user.score += 1
         malware_owner.score -= 1
         node.content = {}
         await node.save()
 
     else:
-        await channel.send(f"You failed to defend against the {malware['type']}!")
+        embed = result_embed(False, rolled, type, favored)
+        await channel.send(embed=embed)
         user.score -= 1
         malware_owner.score += 1
 
     await user.save()
     await malware_owner.save()
 
+
+def result_embed(is_win: bool, rolled: float, type: AttackType, favored: bool):
+    image = ""
+    if type == AttackType.AntiVirus:
+        image = images["anti-virus"]
+    elif type == AttackType.Firewall:
+        image = images["firewall"]
+    elif type == AttackType.Patching:
+        image = images["patching"]
+
+    embed = discord.Embed(
+        title="Attack",
+        description=f"\U00002694 **Success!** \U00002694" if is_win else f"\U000026a1 Failure! **{rolled*100:.2f}%** \U000026a1",
+        color=discord.Color.green() if is_win else discord.Color.red()
+    )
+
+    embed.add_field(name="Type", value=type.value, inline=False)
+    embed.add_field(name="Result", value=f"{rolled*100:.2f}% _(required below {100*0.75 if favored else 100*0.25}%)_", inline=False)
+    embed.set_thumbnail(url=image)
+    embed.set_footer(text="You successfully removed the malware! (+1 cs)" if is_win else "You failed to remove the malware! (-1 cs)")
+
+    return embed

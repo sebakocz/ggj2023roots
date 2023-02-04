@@ -60,8 +60,6 @@ class MyBot(commands.Bot):
         await cleanup_all_content()
 
     async def on_member_join(self, member):
-        await member.edit(nick="Cool Hacker")
-
         # TODO: generate image, name, and background story
         await spawn_user(member)
 

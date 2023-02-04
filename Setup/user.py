@@ -2,12 +2,14 @@ import discord
 
 from Database.Models.node import Node
 from Database.Models.user import User
+from constants import backgrounds, portraits
 
 
-async def spawn_user(user: discord.User):
-    await User.filter(discord_id=user.id).delete()
+async def spawn_user(member: discord.Member):
+    await User.filter(discord_id=member.id).delete()
 
-    await User.create(name="test", discord_id=user.id)
+    user = await User.create(discord_id=member.id)
+    await member.edit(nick=user.name)
 
 
 async def move_to(member: discord.Member, node: Node):
@@ -31,7 +33,8 @@ async def move_to(member: discord.Member, node: Node):
 
 
 def whoami_embed(user: User):
-    embed = discord.Embed(title=f">whoami")
-    embed.add_field(name="<insert hacker name>", value="<insert cool hacker background story>", inline=True)
-    embed.add_field(name="Control Score", value=f"{user.score}", inline=True)
+    embed = discord.Embed(title=user.name)
+    embed.add_field(name="Cool Hacker Background", value=f"_{backgrounds[user.background_id]}_", inline=False)
+    embed.add_field(name=f"Control Score: {user.score} \U0001fa99", value="", inline=False)
+    embed.set_image(url=portraits[user.portrait_id])
     return embed
