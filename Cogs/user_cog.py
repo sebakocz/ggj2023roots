@@ -2,6 +2,11 @@ import logging
 
 import discord
 from discord.ext import commands
+from tortoise.exceptions import DoesNotExist
+
+from Database.Models.node import Node
+from Database.Models.user import User
+from Setup.user import move_to
 
 
 class UserCog(commands.Cog):
@@ -9,6 +14,37 @@ class UserCog(commands.Cog):
         logging.info("Loading Cog: user_cog.py")
         self.bot = bot
 
+    @commands.command()
+    async def cd(self, ctx, *, path):
+        # TODO: why is is this slow?
+        if path == "..":
+            user = await User.get(discord_id=ctx.author.id).prefetch_related("where")
+            parent_node = await Node.get(id=user.where.parent_id)
+            await move_to(ctx.author, parent_node, self.bot)
+            return
+
+        try:
+            node = await Node.get(name=path)
+        except DoesNotExist:
+            await ctx.send("Doesn't exist!")
+            return
+
+        await move_to(ctx.author, node, self.bot)
+
+    @commands.command()
+    async def ls(self, ctx):
+        user = await User.get(discord_id=ctx.author.id).prefetch_related("where")
+        children = await Node.filter(parent_id=user.where.id).all()
+
+        text = ""
+        for child in children:
+            text += child.name + "\n"
+
+        if text == "":
+            text = "Empty Directory."
+
+        text = "```" + text + "```"
+        await ctx.send(text)
 
 
 async def setup(bot):  # an extension must have a setup function

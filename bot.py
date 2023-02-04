@@ -57,7 +57,9 @@ class MyBot(commands.Bot):
 
     async def on_member_join(self, member):
         await spawn_user(member)
-        await move_to(member, None, bot)
+
+        node = await Node.get(name="root")
+        await move_to(member, node, bot)
 
     async def close(self):
         logging.info("Closing discord bot...")
