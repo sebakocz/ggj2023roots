@@ -13,6 +13,13 @@ class TestCog(commands.Cog):
         logging.info("Loading Cog: test_cog.py")
         self.bot = bot
 
+    async def cog_check(self, ctx):
+        if not await self.bot.is_owner(ctx.author):
+            await ctx.send("You are not strong enough for my potions.")
+            raise commands.NotOwner()
+        return True
+
+
     @commands.command()
     async def ping(self, ctx):
         await ctx.send("Pong!")
