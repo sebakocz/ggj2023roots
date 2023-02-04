@@ -23,7 +23,18 @@ portraits = [
     "https://cdn.discordapp.com/attachments/1033862909417246751/1071471708583768144/Sebas_colorful_hacker_portrait_old_b960fe3b-66aa-4150-a118-ee06056a9748.png",
     "https://cdn.discordapp.com/attachments/1033862909417246751/1071471722592747640/Sebas_colorful_hacker_portrait_old_d3f5f7bb-1ac0-4708-9e22-59e210b400d3.png",
     "https://cdn.discordapp.com/attachments/1033862909417246751/1071471726564757544/Sebas_colorful_hacker_portrait_old_7655a083-3bb8-4c21-a839-dec65df1b93d.png",
-
+    "https://cdn.discordapp.com/attachments/1033862909417246751/1071548791783686164/Sebas_colorful_portrait_hacker_dog_6f5ad9dd-eb3a-4490-9882-8b2562993e8e.png",
+    "https://cdn.discordapp.com/attachments/1033862909417246751/1071548809181679798/Sebas_colorful_portrait_hacker_dog_4ea442a2-19f8-4983-a8c2-cb698a6bffda.png",
+    "https://cdn.discordapp.com/attachments/1033862909417246751/1071548811643736154/Sebas_colorful_portrait_hacker_dog_9bdd7d9d-268f-403e-95bc-2a5be737670d.png",
+    "https://cdn.discordapp.com/attachments/1033862909417246751/1071550892605710467/Sebas_colorful_portrait_hacker_cat_ec6051e2-fd70-4016-b56e-1b9467bd3875.png",
+    "https://cdn.discordapp.com/attachments/1033862909417246751/1071550899199148032/Sebas_colorful_portrait_hacker_cat_46b853c3-30b7-48fa-a96f-8e5fa086e99d.png",
+    "https://cdn.discordapp.com/attachments/1033862909417246751/1071550917553438781/Sebas_colorful_portrait_hacker_cat_54fc7986-c7a5-4777-80d0-d478a81b20d1.png",
+    "https://cdn.discordapp.com/attachments/1033862909417246751/1071551221875359854/Sebas_colorful_portrait_hacker_cat_e3396b67-deef-40a6-8cd2-92d1b7604b45.png",
+    "https://cdn.discordapp.com/attachments/1033862909417246751/1071553172998459494/Sebas_colorful_portrait_hacker_rabbit_80394759-022d-4133-8cac-15a207bdafdd.png"
+    "https://cdn.discordapp.com/attachments/1033862909417246751/1071553178367176844/Sebas_colorful_portrait_hacker_rabbit_b77228ea-1236-4e86-b8f2-f1362e1c1995.png",
+    "https://cdn.discordapp.com/attachments/1033862909417246751/1071553181571612712/Sebas_colorful_portrait_hacker_rabbit_dc07988b-0d7b-4240-ac63-094f3afa5adb.png",
+    "https://cdn.discordapp.com/attachments/1033862909417246751/1071553522933436447/Sebas_colorful_portrait_hacker_rabbit_60e28a6d-b6d0-41ec-a5b8-63ea83ba0bcf.png",
+    "https://cdn.discordapp.com/attachments/1033862909417246751/1071555282469126264/Sebas_colorful_portrait_hacker_non-binary_81872e4c-4063-4831-bd86-a0e89fecd6dd.png",
 ]
 
 backgrounds = [
@@ -37,7 +48,21 @@ backgrounds = [
     "A determined problem-solver discovered a passion for hacking, using their skills to bring excitement and chaos to the virtual world. They became known for their bold and daring hacks, always leaving behind a quirky mark that showcased their unique personality. They roamed the digital frontier, a force to be reckoned with and a source of endless inspiration, always pushing the limits of what was possible and leaving a lasting impression on all who encountered them.",
     "A mischievous tech-genius found their calling in the art of hacking, using their wit and cunning to disrupt the virtual world in the most entertaining ways. They quickly gained notoriety for their humorous and innovative hacks, always leaving behind a whimsical signature that showcased their lighthearted personality. They roamed the digital landscape, a wild card and a source of unbridled joy, always pushing the boundaries of what was considered possible and leaving their mark in the most unexpected places.",
     "An imaginative tech-savant discovered a love for hacking, using their creative abilities to bring a touch of fantasy to the digital world. They became renowned for their imaginative and fantastical hacks, always leaving behind a captivating mark that showcased their artistic personality. They roamed the virtual realm, a dreamer and a source of boundless inspiration, always pushing the limits of what was thought possible and leaving a lasting impact on all who encountered them.",
+    "Born and raised in a world where technology is ubiquitous, they honed their skills to manipulate the systems that surround them. Becoming an expert in cryptography and network security, they use their abilities for personal gain and to protect those close to them. But their actions attract the attention of powerful entities, forcing them to constantly stay one step ahead and live a life on the edge.",
+    "A prodigy in programming, they discovered their love for hacking at a young age and honed their skills in the shadows of the internet. As they rose to prominence, they became known for their unmatched mastery of artificial intelligence and virtual reality. Their reputation as a notorious hacker precedes them, but they use their abilities for the greater good, fighting against those who seek to abuse technology for their own gain.",
+    "Growing up in a world where technology reigns supreme, they found solace in the freedom of the virtual realm. Their exceptional coding skills soon drew attention, and they were recruited by a mysterious organization to put their talents to use for a cause greater than themselves. As they navigate this new world of covert operations, they discover the true power of technology and the consequences of using it for good or for evil.",
+    "As a child of the digital age, they always felt a natural affinity for computers and the endless possibilities they offered. Years of dedicated learning and experimentation eventually earned them a reputation as a master hacker, sought after by both corporations and governments. They walk a tightrope between the opposing forces that seek to harness their skills, but ultimately answer only to their own code of ethics and a desire to use their abilities for the greater good.",
+    "Raised in a world of advanced technology, they quickly realized their unique gift for accessing and manipulating even the most secure systems. As they gained experience, they became one of the most sought-after hackers, their services available only to those with the resources to pay their steep fee. Despite their success, they remain guided by a strong moral code, using their abilities to protect the innocent and fight against corruption and injustice in the digital world.",
+    "Having grown up in a time when technology was rapidly advancing, they discovered a knack for cracking even the toughest of codes. They rose through the ranks of the underground hacking community, eventually becoming a legend in the world of cybercrime. Though they operate in the shadows, they are guided by a strong sense of justice and use their skills to expose corruption and bring about positive change in the digital world.",
+    "With an innate understanding of technology, they hacked their way through the virtual world from a young age. As their skills grew, so did their network, eventually leading them to become one of the most sought-after hackers in the game. Despite the dangers they face, they remain fiercely independent, using their abilities to uncover the truth and bring to light secrets hidden deep within the digital realm.",
+    "Born into a world defined by technology, they found solace and purpose in the virtual world, where they discovered an innate talent for hacking. As they honed their skills, they became known for their audacious heists and elusive nature. Though they are often hunted by those they've outwitted, they remain guided by a strong moral compass, using their abilities to protect the oppressed and fight against systemic injustice in the digital age.",
+    "With a natural aptitude for technology, they soon discovered their ability to penetrate even the most secure systems. As they rose to prominence in the underground hacking community, their reputation for cunning and expertise grew. Despite their success, they remain vigilant, using their skills to uncover the truth and protect the innocent, always operating in the shadows to avoid the attention of those who would use their abilities for darker purposes.",
+    "Growing up in a world where technology played a central role, they discovered a passion for hacking at a young age. As they honed their skills, they became one of the most sought-after hackers in the game, their reputation preceding them wherever they went. Despite their success, they remain guided by a strong sense of justice and use their abilities to fight against corruption and bring about positive change in the digital world.",
+    "With a natural affinity for technology, they discovered their talent for hacking early on and quickly rose to prominence in the underground community. Known for their intricate schemes and unbreakable codes, they became a legend in the virtual world. However, they never lost sight of their principles, using their skills to defend the weak and fight against oppression in the digital age.",
+    "Growing up in a world defined by technology, they felt a natural connection to the virtual realm and discovered a talent for hacking. As they honed their skills, they became one of the most sought-after hackers, their reputation for expertise and audacity preceding them. Despite the danger they often face, they remain guided by a strong sense of justice, using their abilities to fight against corruption and protect the vulnerable in the digital world.",
+    "With a mind for technology and an unquenchable thirst for knowledge, they discovered their aptitude for hacking at a young age. As they rose through the ranks of the underground community, they became known for their impeccable track record and unwavering principles. Using their skills to fight against injustice and bring about positive change in the digital world, they remain a force to be reckoned with and a hero to those they protect.",
 ]
+
 names = [
     "Neo-Aria",
     "Tech-Nyle",
@@ -59,6 +84,9 @@ names = [
     "Process-Alexa",
     "Computer-Maddox",
     "Automation-Avery",
+    "Hacker-Riley",
+    "Quantum-Harvey",
+    "Tech-Ella",
 ]
 
 
