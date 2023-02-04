@@ -37,6 +37,11 @@ async def move_to(member: discord.Member, node: Node):
     role = discord.utils.get(member.guild.roles, id=node.role_id)
     await member.add_roles(role)
 
+    # ping user in new channel
+    channel = member.guild.get_channel(node.channel_id)
+    await channel.send(f"<@{member.id}> has entered this directory.")
+
+
 
 def whoami_embed(user: User):
     embed = discord.Embed(title=user.name)
