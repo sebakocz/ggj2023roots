@@ -7,10 +7,11 @@ from tortoise.exceptions import DoesNotExist
 from Database.Models.node import Node
 from Database.Models.user import User
 from Setup.attack import attack, AttackType
-from Setup.items import tree_embed
+from Setup.items import tree_embed, free_embed
 from Setup.malware import set_malware, MalwareType, get_malware_embed
 from Setup.nodes import get_print_all
 from Setup.user import move_to, whoami_embed, leaderboards_embed
+from constants import on_lucky_increment_by
 
 
 class UserCog(commands.Cog):
@@ -73,7 +74,10 @@ class UserCog(commands.Cog):
                 if node.content["item"]:
                     print(node.content)
                     if node.content["item"]["type"] == "tree":
-                        embed = await tree_embed()
+                        embed = tree_embed()
+                        await ctx.send(embed=embed)
+                    if node.content["item"]["type"] == "free":
+                        embed = free_embed(node.content["item"]["text"])
                         await ctx.send(embed=embed)
             except KeyError:
                 pass
@@ -146,8 +150,19 @@ class UserCog(commands.Cog):
                         await ctx.send(text)
                         node.content = {}
                         await node.save()
+
+                    if node.content["item"]["type"] == "free":
+                        await ctx.send(f"You took the advantage! +{on_lucky_increment_by} \U0001fa99")
+                        user = await User.get(discord_id=ctx.author.id)
+                        user.score += on_lucky_increment_by
+                        await user.save()
+                        node.content = {}
+                        await node.save()
+
             except KeyError:
                 pass
+        else:
+            await ctx.send("Nothing to use here!")
 
 async def setup(bot):  # an extension must have a setup function
     await bot.add_cog(UserCog(bot))  # adding a cog

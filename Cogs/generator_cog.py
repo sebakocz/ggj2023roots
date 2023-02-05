@@ -1,4 +1,6 @@
 import logging
+import random
+
 from discord.ext import commands, tasks
 from tortoise.expressions import Q
 
@@ -24,13 +26,24 @@ class GeneratorCog(commands.Cog):
             except KeyError:
                 pass
         print("Generating...")
-        print(f"Corrently {len(nodes_with_item)} nodes with an item.")
+        print(f"Currently {len(nodes_with_item)} nodes with an item.")
         for node in nodes_with_item:
             print(f"-> {node.name} [{node.content['item']['type']}]")
 
         need_to_generate = max(max_items - len(nodes_with_item), 0)
         print(f"need to generate {need_to_generate} items.")
-        await spawn_items('tree', need_to_generate)
+
+        # randomly disribute items, min 1 of each
+        # types: tree, free
+        tree = 1
+        free = 1
+        if need_to_generate > 0:
+            tree += random.randint(0, need_to_generate - 1)
+            free += need_to_generate - tree
+            print(f"tree: {tree}, free: {free}")
+
+            await spawn_items("tree", tree)
+            await spawn_items("free", free)
 
 
 

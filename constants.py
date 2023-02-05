@@ -1,5 +1,6 @@
 timeout = 60
 on_timeout_increment_by = 5
+on_lucky_increment_by = 3
 max_items = 5
 
 images = {
@@ -91,5 +92,11 @@ names = [
     "Tech-Ella",
 ]
 
-
+texts = [
+    "Root of All Evil has misconfigured a file here, abuse that!",
+    "Root of All Evil forgot their root permissions here, muhahaha!",
+    "Square root of 2 is being calculated here, you found some data leaks!",
+    "You found cached credentials of the Root of All Evil, lucky find!",
+    "Root of All Evil has left a backdoor here, you found it!",
+]
 
