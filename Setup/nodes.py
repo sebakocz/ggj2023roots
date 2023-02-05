@@ -67,7 +67,9 @@ nodes = {
         "textures": {
             "anime": {},
         },
-        "libraries": {},
+        "libraries": {
+            "books": {},
+        },
     }
 }
 
