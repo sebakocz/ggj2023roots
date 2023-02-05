@@ -1,14 +1,3 @@
-# /
-# - foo
-#   - foobar
-#   - foobaz
-# - bar
-#   - barfoo
-#       - barfooqux
-#       - barfooquux
-# - baz
-# - qux
-# - quux
 import asyncio
 
 import discord
@@ -17,19 +6,68 @@ from Database.Models.node import Node
 
 nodes = {
     "root": {
-        "foo": {
-                "foobar": {},
-                "foobaz": {},
+        "audio": {
+            "music": {
+                "track_kirby": {},
+                "elevator_music": {},
+                "track_001": {},
+                "track_003": {},
             },
-            "bar": {
-                "barfoo": {
-                    "barfooqux": {},
-                    "barfooquux": {},
-                },
+            "sound": {
+                "chewbacca": {},
+                "whale": {},
+                "scream": {},
             },
-        "baz": {},
-        "qux": {},
-        "quux": {},
+        },
+        "materials": {
+            "metal": {},
+            "wood": {},
+            "stone": {},
+            "sheep": {},
+            "wheat": {},
+        },
+        "prefabs": {
+            "furniture": {},
+            "house": {},
+            "tree": {},
+            "wall": {},
+            "window": {},
+            "the_one_ring": {},
+        },
+        "scenes": {
+            "visuals_test_scene": {},
+            "tutorials": {
+                "tutorial_1": {},
+                "tutorial_2": {},
+                "tutorial_3": {},
+            },
+        },
+        "scripts": {
+            "game_manager": {},
+        },
+        "settings": {
+            "main_menu": {},
+        },
+        "sprites": {
+            "game_over": {},
+            "general": {},
+            "paused": {},
+            "player": {},
+            "npcs": {
+                "glados": {},
+                "claptrap": {},
+                "cortana": {},
+                "morgan_freeman": {},
+            },
+            "ui": {
+                "buttons": {},
+                "icons": {},
+            },
+        },
+        "textures": {
+            "anime": {},
+        },
+        "libraries": {},
     }
 }
 

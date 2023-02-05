@@ -130,6 +130,7 @@ class UserCog(commands.Cog):
         await ctx.send("```"
                        ">ls - list directory\n"
                        ">cd [path | ..] - change directory\n"
+                       ">use - use found item\n"
                        ">whoami - show your stats\n"
                        ">deploy ['worm' | 'virus' | 'trojan'] - deploy malware\n"
                        ">apply ['firewall' | 'patching' | 'anti-virus'] - apply attack\n"
