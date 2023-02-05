@@ -60,7 +60,7 @@ def whoami_embed(user: User):
     return embed
 
 
-def cooldown(created_at: int | None):
+def cooldown(created_at):
     if created_at is None:
         return "1"
     return "1" if created_at + timeout < datetime.utcnow().timestamp() else "0"
