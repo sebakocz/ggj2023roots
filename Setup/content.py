@@ -9,6 +9,9 @@ async def cleanup_all_content():
 
     for node in nodes:
         if node.content != {}:
-            if node.content[list(node.content.keys())[0]]["created_at"] + timeout < datetime.utcnow().timestamp():
-                node.content = {}
-                await node.save()
+            try:
+                if node.content[list(node.content.keys())[0]]["created_at"] + timeout < datetime.utcnow().timestamp():
+                    node.content = {}
+                    await node.save()
+            except KeyError:
+                pass

@@ -1,10 +1,11 @@
 import random
+from datetime import datetime
 
 import discord
 
 from Database.Models.node import Node
 from Database.Models.user import User
-from constants import backgrounds, portraits, names
+from constants import backgrounds, portraits, names, timeout
 
 
 async def spawn_user(member: discord.Member):
@@ -45,11 +46,23 @@ async def move_to(member: discord.Member, node: Node):
 
 def whoami_embed(user: User):
     embed = discord.Embed(title=user.name)
+    embed.set_image(url=portraits[user.portrait_id])
     embed.add_field(name="Cool Hacker Background", value=f"_{backgrounds[user.background_id]}_", inline=False)
     embed.add_field(name=f"Control Score: {user.score} \U0001fa99", value="", inline=False)
-    embed.set_image(url=portraits[user.portrait_id])
+    # info about attacks and defenses
+    embed.add_field(name="Deploy", value=f"Virus: ({cooldown(user.virus_last_created_at)}/1) \U0001f9a0\n"
+                                            f"Trojan: ({cooldown(user.trojan_last_created_at)}/1) \U0001f434\n"
+                                            f"Worm: ({cooldown(user.worm_last_created_at)}/1) \U0001fab1\n")
+    embed.add_field(name="Apply", value=f"Firewall: ({cooldown(user.firewall_last_created_at)}/1) \U0001f9ef\n"
+                                        f"Anti-Virus: ({cooldown(user.anti_virus_last_created_at)}/1) \U0001f6e1\n"
+                                        f"Patching: ({cooldown(user.patching_last_created_at)}/1) \U0001f6e0\n")
     return embed
 
+
+def cooldown(created_at: int | None):
+    if created_at is None:
+        return "1"
+    return "1" if created_at + timeout < datetime.utcnow().timestamp() else "0"
 
 async def leaderboards_embed():
     top_10_users = await User.all().order_by("-score")

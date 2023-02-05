@@ -53,6 +53,7 @@ class MyBot(commands.Bot):
 
         await bot.load_extension("Cogs.main_cog")
         await bot.load_extension("Cogs.user_cog")
+        await bot.load_extension("Cogs.generator_cog")
 
         if is_dev:
             await bot.load_extension("Cogs.test_cog")

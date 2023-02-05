@@ -1,5 +1,6 @@
 timeout = 60
 on_timeout_increment_by = 5
+max_items = 5
 
 images = {
     "firewall": "https://cdn.discordapp.com/attachments/1033862909417246751/1071418342520401991/Sebas_virus_digital_art_colorful_firewall_6ecd1931-b36e-4f27-9de7-96990020e5b2.png",
@@ -8,6 +9,7 @@ images = {
     "worm": "https://cdn.discordapp.com/attachments/1033862909417246751/1071427947220701275/Sebas_virus_digital_art_colorful_worm_dark_9a7214de-dfc1-4c58-b4b5-bb374685ba98.png",
     "virus": "https://cdn.discordapp.com/attachments/1033862909417246751/1071427994415022120/Sebas_virus_digital_art_colorful_virus_dark_d2eeb4b8-ed30-4baf-9c76-7521f89834f4.png",
     "trojan": "https://cdn.discordapp.com/attachments/1033862909417246751/1071428350326886500/Sebas_virus_digital_art_colorful_trojan_dark_horse_head_94e32744-97e0-468c-ae2d-2ea3558c4b91.png",
+    "tree": "https://cdn.discordapp.com/attachments/1033862909417246751/1071731940522201158/Sebas_colorful_hacker_tree_tech_files_nodes_28db8432-b1f3-47a4-b40f-b82bfe3bf59f.png",
 }
 
 portraits = [

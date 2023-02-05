@@ -4,6 +4,7 @@ import discord
 from discord.ext import commands
 
 from Database.Models.node import Node
+from Setup.items import spawn_items, clear_items
 from Setup.nodes import setup_nodes, get_print_all
 from Setup.user import spawn_user, move_to
 
@@ -42,6 +43,18 @@ class TestCog(commands.Cog):
         node = await Node.get(name="root")
         await move_to(ctx.author, node)
         await ctx.send("Spawned!")
+
+    @commands.command()
+    async def spawn_items(self, ctx, type):
+        await ctx.send("Spawning items...")
+        await spawn_items(type)
+        await ctx.send("Done!")
+
+    @commands.command()
+    async def clear_items(self, ctx):
+        await ctx.send("Clearing items...")
+        await clear_items()
+        await ctx.send("Done!")
 
 
 async def setup(bot):  # an extension must have a setup function

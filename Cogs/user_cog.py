@@ -7,7 +7,9 @@ from tortoise.exceptions import DoesNotExist
 from Database.Models.node import Node
 from Database.Models.user import User
 from Setup.attack import attack, AttackType
+from Setup.items import tree_embed
 from Setup.malware import set_malware, MalwareType, get_malware_embed
+from Setup.nodes import get_print_all
 from Setup.user import move_to, whoami_embed, leaderboards_embed
 
 
@@ -60,10 +62,21 @@ class UserCog(commands.Cog):
 
         node = await Node.get(channel_id=ctx.channel.id)
         if node.content:
-            if node.content["malware"]:
-                creator = await User.get(discord_id=node.content["malware"]["owner"])
-                embed = get_malware_embed(MalwareType(node.content["malware"]["type"]), creator)
-                await ctx.send(embed=embed)
+            try:
+                if node.content["malware"]:
+                    creator = await User.get(discord_id=node.content["malware"]["owner"])
+                    embed = get_malware_embed(MalwareType(node.content["malware"]["type"]), creator)
+                    await ctx.send(embed=embed)
+            except KeyError:
+                pass
+            try:
+                if node.content["item"]:
+                    print(node.content)
+                    if node.content["item"]["type"] == "tree":
+                        embed = await tree_embed()
+                        await ctx.send(embed=embed)
+            except KeyError:
+                pass
 
     @commands.command()
     async def whoami(self, ctx):
@@ -118,6 +131,23 @@ class UserCog(commands.Cog):
                        ">apply ['firewall' | 'patching' | 'anti-virus'] - apply attack\n"
                        ">leaderboards - show leaderboards\n"
                        "```")
+
+    @commands.command()
+    async def use(self, ctx):
+        node = await Node.get(channel_id=ctx.channel.id)
+        if node.content:
+            # tree
+            try:
+                if node.content["item"]:
+                    if node.content["item"]["type"] == "tree":
+                        await ctx.send("You unpacked the tree!")
+                        text = await get_print_all()
+                        text = "```" + text + "```"
+                        await ctx.send(text)
+                        node.content = {}
+                        await node.save()
+            except KeyError:
+                pass
 
 async def setup(bot):  # an extension must have a setup function
     await bot.add_cog(UserCog(bot))  # adding a cog
