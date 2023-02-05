@@ -28,6 +28,9 @@ To play Roots(s), simply join the [discord server](https://discord.gg/FtvH5AkANh
 
 <img src="https://discordapp.com/api/guilds/1071165615689187439/widget.png?style=banner2" alt="Discord Banner 1"/>
 
+![frame (1)](https://user-images.githubusercontent.com/44639352/216828557-49478b07-391f-4c77-88c0-c48c3543b232.png)
+
+
 --- 
 
 ## Credits
