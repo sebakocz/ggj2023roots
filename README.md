@@ -24,7 +24,9 @@ Use the `>leaderboards` command to view the current standings of all players in 
 Explore the system via `>use` to find various interactables, including misconfigurations, cached credentials, and more.
 
 ## :rocket: Getting Started
-To play Roots(s), simply join the discord server. From there, you can start exploring and deploying malware to become the ultimate root. In case you get stuck, use the `>help` command to view a list of all commands.
+To play Roots(s), simply join the [discord server](https://discord.gg/FtvH5AkANh). From there, you can start exploring and deploying malware to become the ultimate root. In case you get stuck, use the `>help` command to view a list of all commands.
+
+<img src="https://discordapp.com/api/guilds/1071165615689187439/widget.png?style=banner2" alt="Discord Banner 1"/>
 
 --- 
 
