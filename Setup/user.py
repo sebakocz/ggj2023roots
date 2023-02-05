@@ -8,7 +8,7 @@ from Database.Models.user import User
 from constants import backgrounds, portraits, names, timeout
 
 
-async def spawn_user(member: discord.Member):
+async def spawn_user(member: discord.Member, admin=False):
     await User.filter(discord_id=member.id).delete()
 
     user = await User.create(discord_id=member.id)
@@ -16,7 +16,8 @@ async def spawn_user(member: discord.Member):
     user.background_id = random.randint(0, len(backgrounds) - 1)
     user.portrait_id = random.randint(0, len(portraits) - 1)
     await user.save()
-    await member.edit(nick=user.name)
+    if not admin:
+        await member.edit(nick=user.name)
 
 
 async def move_to(member: discord.Member, node: Node):
